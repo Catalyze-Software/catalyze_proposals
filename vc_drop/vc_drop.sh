@@ -132,9 +132,8 @@ drop_neurons() {
   get_balance
 
   # MEMO AMOUNT DISSOLVE_DELAY_SECONDS
-  NEURON_0_DELAY=60
-  NEURON_1_DELAY=180
-  NEURON_2_DELAY=240
+  NEURON_1_DELAY=31560000
+  NEURON_2_DELAY=63120000
 
 # To access the first element of the first tuple:
   IFS=' ' read -r neuron_0_memo neuron_0_amount <<< $NEURON_0
@@ -158,18 +157,15 @@ drop_neurons() {
   neuron_id_2=$(get_neuron_id_by_memo $neuron_2_memo)
   set_dissolve_delay $neuron_id_2 $NEURON_2_DELAY
   add_vc_permissions $neuron_id_2 $VC_PRINCIPAL
-  # remove_owner_permissions $neuron_id_2 $OWNER_PRINCIPAL
 
   # this step should be last because its sets the owner as controller which removes the ability to split the neuron
   # INITIAL NEURON
-  set_dissolve_delay $initial_neuron $NEURON_0_DELAY
   add_vc_permissions $initial_neuron $VC_PRINCIPAL
   # remove_owner_permissions $initial_neuron $OWNER_PRINCIPAL
 }
 
-get_balance
-# drop_neurons \
-# "swlp6-6qujk-ozivy-wtwp2-rkvp5-figiu-j7mdt-rztl2-jgvfg-bn4jg-bqe" \
-#   "300 16.003" \
-#   "301 4.001" \
-#   "302 4.001" \
+remove_owner_permissions "3603fcb972dfd0ccc026bf8cb5e88675be7cb460d796d35f82ce13e763ff74ed" $OWNER_PRINCIPAL
+remove_owner_permissions "72d40ccb8c10b52466dddb1bf56d847b3b90c511383df2b5bd431d42a94bc9bc" $OWNER_PRINCIPAL
+remove_owner_permissions "e0df64e248e2e603a1e89812756f7161c50dff4442fc4f74742e680c14f4ff35" $OWNER_PRINCIPAL
+# get_balance
+# drop_neurons "ljxsi-5du4w-3se32-vba6v-dd543-rrj3g-nayx2-f7xhd-o4u7a-ycmxw-bae" "567 42500000.003" "568 19125000.001" "569 19125000.001"
